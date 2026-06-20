@@ -1,18 +1,18 @@
 export const navigationLinks = [
   {
     title: "About",
-    href: "#about",
+    href: "/#about",
   },
   {
     title: "Tracks",
-    href: "#tracks",
+    href: "/#tracks",
   },
   {
     title: "Why ICA",
-    href: "#why",
+    href: "/#why",
   },
   {
     title: "FAQ",
-    href: "#faq",
+    href: "/#faq",
   },
 ];

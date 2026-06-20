@@ -1,9 +1,15 @@
+import { Link } from "react-router-dom";
 type Props = {
   title: string;
   points: string[];
+  slug: string;
 };
 
-const LearningCard = ({ title, points }: Props) => {
+const LearningCard = ({
+  title,
+  points,
+  slug,
+}: Props) => {
   return (
 <div className="group flex h-full flex-col rounded-3xl border border-white/10 bg-[#071533]/70 p-6 backdrop-blur-xl transition-all duration-300  hover:border-blue-400/40 hover:shadow-[0_0_40px_rgba(59,130,246,0.15)]">      
       {/* Title */}
@@ -22,9 +28,27 @@ const LearningCard = ({ title, points }: Props) => {
       </ul>
 
       {/* Button */}
-      <button className="mt-auto w-full  rounded-xl border border-white/10 bg-transparent py-3 text-sm font-semibold text-white transition hover:border-blue-400/40 hover:bg-blue-500/10">
-        Explore Track
-      </button>
+     <Link
+  to={`/track/${slug}`}
+  className="
+  mt-auto
+  block
+  w-full
+  rounded-xl
+  border
+  border-white/10
+  py-3
+  text-center
+  text-sm
+  font-semibold
+  text-white
+  transition
+  hover:border-blue-400/40
+  hover:bg-blue-500/10
+  "
+>
+  Explore Track
+</Link>
     </div>
   );
 };

@@ -2,6 +2,8 @@ import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import logo from "../../assets/logos/Gemini_Generated_Image_uzp7zxuzp7zxuzp7-removebg-preview-removebg-preview.png";
 import { navigationLinks } from "../../data/navigation";
+import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
   return (
@@ -11,9 +13,11 @@ const Navbar = () => {
   <div className="mx-auto flex h-20 max-w-375 items-center justify-between px-4 sm:px-6 lg:px-10 backdrop-blur-xl">
 
           <div className="flex items-center gap-2">
-           <a
-  href="/"
+       <Link
+  to="/"
   className="flex items-center gap-2"
+    onClick={() => window.scrollTo(0, 0)}
+
 >
   <img
     src={logo}
@@ -24,19 +28,20 @@ const Navbar = () => {
   <h2 className="text-lg font-bold text-white">
     ICA Academy
   </h2>
-</a>
+</Link>
           </div>
           
 
          <nav className="hidden items-center gap-8 text-slate-300 lg:flex">
   {navigationLinks.map((link) => (
-    <a
-      key={link.href}
-      href={link.href}
-      className="hover:text-blue-500 transition-all"
-    >
-      {link.title}
-    </a>
+   <HashLink
+  smooth
+  key={link.href}
+  to={link.href}
+  className="transition-all hover:text-blue-500"
+>
+  {link.title}
+</HashLink>
   ))}
 </nav>
           <div className="hidden lg:flex items-center gap-4">
@@ -63,14 +68,15 @@ const Navbar = () => {
         
        <div className="flex flex-col p-6 text-slate-300">
   {navigationLinks.map((link) => (
-    <a
-      key={link.href}
-      href={link.href}
-      onClick={() => setIsOpen(false)}
-      className="py-3 text-center hover:text-blue-500 transition"
-    >
-      {link.title}
-    </a>
+    <HashLink
+  smooth
+  key={link.href}
+  to={link.href}
+  onClick={() => setIsOpen(false)}
+  className="py-3 text-center transition hover:text-blue-500"
+>
+  {link.title}
+</HashLink>
   ))}
 
   <div className="mt-6 flex flex-col gap-3">

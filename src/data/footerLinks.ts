@@ -3,19 +3,19 @@ export const footerLinks = {
   quickLinks: [
     {
       title: "About",
-      href: "#about",
+      href: "/#about",
     },
     {
       title: "Tracks",
-      href: "#tracks",
+      href: "/#tracks",
     },
     {
       title: "Journey",
-      href: "#journey",
+      href: "/#journey",
     },
     {
       title: "FAQ",
-      href: "#faq",
+      href: "/#faq",
     },
   ],
 

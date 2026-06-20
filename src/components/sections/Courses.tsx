@@ -35,9 +35,10 @@ const Courses = () => {
               }}
             >
               <LearningCard
-                title={track.title}
-                points={track.points}
-              />
+  title={track.title}
+  points={track.points}
+  slug={track.slug}
+/>
             </motion.div>
           ))}
         </div>

@@ -1,5 +1,6 @@
 export const tracks = [
   {
+      slug: "frontend",
     title: "Front-End Development",
     points: [
       "HTML & CSS",
@@ -9,6 +10,7 @@ export const tracks = [
     ],
   },
   {
+     slug: "backend",
     title: "Back-End Development",
     points: [
       "Server Architecture",
@@ -18,6 +20,8 @@ export const tracks = [
     ],
   },
   {
+
+  slug: "mobile",
     title: "Mobile Development",
     points: [
       "React Native",
@@ -26,16 +30,20 @@ export const tracks = [
       "Performance",
     ],
   },
+{
+  slug: "ai",
+
+  title: "Artificial Intelligence",
+
+  points: [
+    "Machine Learning",
+    "Deep Learning",
+    "NLP",
+    "AI Applications",
+  ],
+},
   {
-    title: "Artificial Intelligence",
-    points: [
-      "Machine Learning",
-      "Deep Learning",
-      "NLP",
-      "AI Applications",
-    ],
-  },
-  {
+    slug: "cyber-security",
     title: "Cyber Security",
     points: [
       "Network Security",
@@ -45,6 +53,7 @@ export const tracks = [
     ],
   },
   {
+     slug: "data-engineering",
     title: "Data Engineering",
     points: [
       "Data Pipelines",

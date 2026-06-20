@@ -2,6 +2,7 @@ import Container from "./Container";
 import { companyInfo } from "../../data/company";
 import { footerLinks, socialLinks } from "../../data/footerLinks";
 import { Mail } from "lucide-react";
+import { HashLink } from "react-router-hash-link";
 
 const Footer = () => {
   return (
@@ -69,8 +70,10 @@ const Footer = () => {
 <ul className="mt-6 space-y-4 ">
                   {footerLinks.quickLinks.map((link) => (
                <li key={link.title}>
-  <a
-    href={link.href}
+  <HashLink
+    smooth
+    key={link.href}
+     to={link.href}
     className="
       relative text-slate-400
       transition-all duration-300
@@ -80,7 +83,9 @@ const Footer = () => {
   >
     <span className="absolute left-0 top-1/2 h-1 w-1 -translate-y-1/2 rounded-full bg-blue-400 opacity-0 transition-all duration-300 group-hover:opacity-100" />
     {link.title}
-  </a>
+  </HashLink>
+
+
 </li>
               ))}
             </ul>
