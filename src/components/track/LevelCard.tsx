@@ -9,8 +9,9 @@ type Props = {
 
   deliverable: string;
   cta: string;
-};
 
+  trackTitle: string;
+};
 const LevelCard = ({
   level,
   title,
@@ -19,7 +20,25 @@ const LevelCard = ({
   outcomes,
   deliverable,
   cta,
+  trackTitle,
 }: Props) => {
+
+  const message =
+  cta.toLowerCase().includes("internship")
+    ? `Hello ICA Academy,
+
+I'm interested in internship opportunities in the ${trackTitle}.
+
+Could you please provide me with details about the requirements, application process, and available positions?
+
+Thank you.`
+    : `Hello ICA Academy,
+
+I'm interested in the ${title} (${level}) of the ${trackTitle}.
+
+Could you please provide me with more details about enrollment, schedule, fees, and the application process?
+
+Thank you.`;
   return (
  <motion.div
   initial={{
@@ -101,22 +120,23 @@ whileInView={{
         </p>
       </div>
 
-      <button
-        className="
-        mt-8
-        rounded-xl
-        bg-blue-600
-        px-6
-        py-3
-        font-semibold
-        text-white
-        transition
-        hover:bg-blue-500
-
-        "
-      >
-        {cta}
-      </button>
+<a
+  href={`https://wa.me/201038862184?text=${encodeURIComponent(message)}`}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="
+    mt-8 inline-block
+    rounded-xl
+    bg-blue-600
+    px-6 py-3
+    font-semibold
+    text-white
+    transition
+    hover:bg-blue-500
+  "
+>
+  {cta}
+</a>
     </motion.div>
   );
 };

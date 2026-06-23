@@ -3,9 +3,9 @@ import {
   Play,
   Code2,
   Database,
-  Network,
-  Cloud,
   Cpu,
+  MonitorSmartphone,
+  BrainCircuit,
 } from "lucide-react";
 import { motion } from "framer-motion";
 const Hero = () => {
@@ -117,54 +117,59 @@ className="mt-10 flex flex-col gap-4 sm:flex-row">
 </motion.div>
           {/* Stats */}
 
-<div className="mt-14 grid grid-cols-2 gap-4 border-t border-white/10 pt-6 sm:grid-cols-2 md:grid-cols-4">
+<div className="mt-14 grid grid-cols-2 gap-4 border-t border-white/10 pt-6 xl:grid-cols-5 lg:grid-cols-3">  
   <div className="border-s-2 border-white/10 ps-4 md:ps-6">
-    <h3 className="text-xl font-bold text-cyan-500 md:text-2xl">
+    <h3 className="text-xl font-bold text-cyan-400 md:text-2xl">
       500+
     </h3>
-
     <p className="mt-1 text-xs text-slate-500 md:text-sm">
       Students
     </p>
   </div>
 
   <div className="border-s-2 border-white/10 ps-4 md:ps-6">
-    <h3 className="text-xl font-bold text-blue-500 md:text-2xl">
+    <h3 className="text-xl font-bold text-blue-400 md:text-2xl">
+      3
+    </h3>
+    <p className="mt-1 text-xs text-slate-500 md:text-sm">
+      Branches + Online
+    </p>
+  </div>
+
+
+  <div className="border-s-2 border-white/10 ps-4 md:ps-6">
+    <h3 className="text-xl font-bold text-violet-600 md:text-2xl">
       Industry
     </h3>
-
     <p className="mt-1 text-xs text-slate-500 md:text-sm">
       Mentors
     </p>
   </div>
 
   <div className="border-s-2 border-white/10 ps-4 md:ps-6">
-    <h3 className="text-xl font-bold text-violet-500 md:text-2xl">
+    <h3 className="text-xl font-bold text-blue-400 md:text-2xl">
       Real
     </h3>
-
     <p className="mt-1 text-xs text-slate-500 md:text-sm">
       Projects
     </p>
   </div>
 
-  <div className="border-s-2 border-white/10 ps-4 md:ps-6">
-    <h3 className="text-xl font-bold text-cyan-500 md:text-2xl">
+   <div className="border-s-2 border-white/10 ps-4 md:ps-6">
+    <h3 className="text-xl font-bold text-blue-500 md:text-2xl">
       Career
     </h3>
-
     <p className="mt-1 text-xs text-slate-500 md:text-sm">
       Oriented
     </p>
   </div>
 
 </div>
-
         </div>
 
         {/* Right Side */}
 
-        <div className="relative hidden h-175 items-center justify-center lg:flex">
+<div className="relative hidden h-175 items-center justify-center lg:flex lg:px-10">
 <div className="absolute h-175 w-175 rounded-full bg-cyan-500/10 blur-[160px]" />
           {/* Outer Rings */}
 
@@ -255,15 +260,14 @@ className="mt-10 flex flex-col gap-4 sm:flex-row">
     whileHover={{
     scale: 1.05,
   }}
-  className="absolute  top-20 right-10 rotate-6  flex items-center gap-3 rounded-2xl border border-white/10 bg-[#071533] px-5 py-4 backdrop-blur-xl"
+  className="absolute  lg:top-16 lg:right-6 rotate-6  flex items-center gap-3 rounded-2xl border border-white/10 bg-[#071533] px-5 py-4 backdrop-blur-xl"
 >
     <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-blue-500/30 bg-[#132343]">
 
-            <Cloud size={18} className="text-blue-400" />
+            <MonitorSmartphone size={18} className="text-blue-400" />
             </div>
             <span className="text-white">
-              Cloud Arch
-
+              Mopile Development
 
             </span>
           {/* </div> */}
@@ -280,14 +284,14 @@ className="mt-10 flex flex-col gap-4 sm:flex-row">
     whileHover={{
     scale: 1.05,
   }}
-className="absolute left-4 top-[52%] -rotate-6 flex items-center gap-3 rounded-2xl border border-white/10 bg-[#071533] px-5 py-4 backdrop-blur-xl"
+className="absolute lg:left-10 lg:top-[55%] -rotate-6 flex items-center gap-3 rounded-2xl border border-white/10 bg-[#071533] px-5 py-4 backdrop-blur-xl"
 >
     <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-blue-500/30 bg-[#132343]">
 
-            <Network size={18} className="text-white" />
+            <BrainCircuit size={18} className="text-violet-300" />
             </div>
             <span className="text-white">
-              Cybersecurity
+              AI
             </span>
           {/* </div> */}
 </motion.div>
@@ -303,7 +307,7 @@ className="absolute left-4 top-[52%] -rotate-6 flex items-center gap-3 rounded-2
     whileHover={{
     scale: 1.05,
   }}
-  className="absolute bottom-24 right-10 rotate-3  flex items-center gap-3 rounded-2xl border border-white/10 bg-[#071533] px-5 py-4 backdrop-blur-xl"
+  className="absolute lg:bottom-16 lg:right-10 rotate-3  flex items-center gap-3 rounded-2xl border border-white/10 bg-[#071533] px-5 py-4 backdrop-blur-xl"
 >
     <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-blue-500/30 bg-[#132343]">
 
@@ -311,7 +315,7 @@ className="absolute left-4 top-[52%] -rotate-6 flex items-center gap-3 rounded-2
             </div>
             <span className="text-white">
 
-            Data Science
+            Data Engineering
 
             </span>
           {/* </div> */}
@@ -328,7 +332,7 @@ className="absolute left-4 top-[52%] -rotate-6 flex items-center gap-3 rounded-2
   whileHover={{
     scale: 1.05,
   }}
-  className="absolute left-24 top-20 -rotate-3 flex items-center gap-3 rounded-2xl border border-white/10 bg-[#071533]/90 px-5 py-4 backdrop-blur-xl"
+  className="absolute lg:left-16 lg:top-16 -rotate-3 flex items-center gap-3 rounded-2xl border border-white/10 bg-[#071533]/90 px-5 py-4 backdrop-blur-xl"
 >
 <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-blue-500/30 bg-[#132343]">
   <Code2
@@ -338,7 +342,7 @@ className="absolute left-4 top-[52%] -rotate-6 flex items-center gap-3 rounded-2
 </div>
 
   <span className="text-white">
-    Development
+   Web Development
   </span>
 </motion.div>
         </div>

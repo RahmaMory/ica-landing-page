@@ -1,6 +1,6 @@
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import logo from "../../assets/logos/Gemini_Generated_Image_uzp7zxuzp7zxuzp7-removebg-preview-removebg-preview.png";
+import logo from "../../assets/logos/ICA-removebg-preview.png";
 import { navigationLinks } from "../../data/navigation";
 import { Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
@@ -22,12 +22,9 @@ const Navbar = () => {
   <img
     src={logo}
     alt="ICA Academy"
-    className="h-10 w-auto"
+    className="h-auto w-36"
   />
 
-  <h2 className="text-lg font-bold text-white">
-    ICA Academy
-  </h2>
 </Link>
           </div>
           
