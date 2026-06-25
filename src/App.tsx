@@ -6,6 +6,7 @@ import { AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import TrackDetails from "./pages/TrackDetails";
+import Policies from "./pages/Policies";
 
 function App() {
   const location = useLocation();
@@ -24,6 +25,7 @@ function App() {
       path="/track/:slug"
       element={<TrackDetails />}
     />
+    <Route path="/policies" element={<Policies />} />
   </Routes>
 </AnimatePresence>
 

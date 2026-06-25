@@ -95,6 +95,8 @@ useEffect(() => {
   subtitle={track.subtitle}
   target={track.target}
   learningStyle={track.learningStyle}
+    formUrl={track.qualificationFormUrl}
+
 />
 
   <CareerOutcomes
@@ -152,7 +154,7 @@ useEffect(() => {
                 topics={level.topics}
                 outcomes={level.outcomes}
                 deliverable={level.deliverable}
-                cta={level.cta}
+               
                 trackTitle={track.title}
               />
             ))}

@@ -2,29 +2,25 @@
 export const footerLinks = {
   quickLinks: [
     {
-      title: "About",
+      title: "About Us",
       href: "/#about",
     },
     {
       title: "Tracks",
       href: "/#tracks",
     },
-    {
-      title: "Journey",
-      href: "/#journey",
-    },
-    {
+     {
       title: "FAQ",
       href: "/#faq",
     },
+    {
+      title: "Contact",
+      href:"https://wa.me/201038862184"
+    },
+   
   ],
 
-  resources: [
-    "Blog",
-    "Community",
-    "Mentorship",
-    "Career Support",
-  ],
+ 
 };
 
 

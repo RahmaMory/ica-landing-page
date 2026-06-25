@@ -63,7 +63,7 @@ className="text-[42px] font-bold leading-[1.05] text-white sm:text-5xl md:text-7
   transition={{ delay: 0.7 }}
 className="mt-10 flex flex-col gap-4 sm:flex-row">
 
-           <button
+           <a href="#journey"
   className="
     group flex w-full sm:w-auto items-center justify-center gap-2
 
@@ -88,9 +88,9 @@ className="mt-10 flex flex-col gap-4 sm:flex-row">
     size={18}
     className="transition group-hover:translate-x-1"
   />
-</button>
+</a>
 
-         <button
+        <a href="#tracks"
   className="
     group flex w-full sm:w-auto items-center justify-center gap-2
 
@@ -112,7 +112,7 @@ className="mt-10 flex flex-col gap-4 sm:flex-row">
   <Play size={16} className="transition group-hover:scale-110" />
 
   Explore Tracks
-</button>
+</a>
 
 </motion.div>
           {/* Stats */}
@@ -129,10 +129,10 @@ className="mt-10 flex flex-col gap-4 sm:flex-row">
 
   <div className="border-s-2 border-white/10 ps-4 md:ps-6">
     <h3 className="text-xl font-bold text-blue-400 md:text-2xl">
-      3
+      3+
     </h3>
     <p className="mt-1 text-xs text-slate-500 md:text-sm">
-      Branches + Online
+      Branches
     </p>
   </div>
 

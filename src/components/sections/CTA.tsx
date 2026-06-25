@@ -25,7 +25,7 @@ const CTA = () => {
           </p>
 
           <div className="mt-12 flex flex-col justify-center gap-4 sm:flex-row">
-            <button
+            <a href="#tracks"
   className="
     group flex w-full sm:w-auto items-center justify-center gap-2
 
@@ -44,14 +44,14 @@ const CTA = () => {
     hover:shadow-[0_0_40px_rgba(59,130,246,0.25)]
   "
 >
-  Start Qualification Test
+  Choose Your Track
   <ArrowRight
     size={18}
     className="transition group-hover:translate-x-1"
   />
-</button>
+</a>
 
-        <button
+        <a  target="_blank" rel="noopener noreferrer" href="https://wa.me/201038862184"
   className="
     w-full sm:w-auto
 
@@ -70,7 +70,7 @@ const CTA = () => {
   "
 >
   Contact Us
-</button>
+</a>
           </div>
         </motion.div>
       </Container>

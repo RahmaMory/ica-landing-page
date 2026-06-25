@@ -13,6 +13,8 @@ export type Level = {
 export type TrackDetails = {
   slug: string;
 
+  qualificationFormUrl?:string;
+  
   title: string;
 
   subtitle: string;

@@ -4,6 +4,10 @@ export const trackDetails: TrackDetails[] = [
   {
     slug: "ai",
 
+      qualificationFormUrl:
+    "https://docs.google.com/forms/d/e/1FAIpQLSfMFDC7RFrcCGuQoq9ji-rtYe66ixpg6A4uhdwOMn1CIo-QsA/viewform?embedded=true" ,
+
+
     title: "AI Track",
 
     subtitle:
@@ -202,6 +206,8 @@ internshipCta:
 },
   {
   slug: "data-engineering",
+  qualificationFormUrl:"https://docs.google.com/forms/d/e/1FAIpQLScU7j-G__F6u_RDAvE7CZvAVJeisuA6C-i1kkvdxmXoBbW-Ag/viewform?embedded=true" ,
+
 
   duration: "12-15 Months",
 
@@ -421,6 +427,7 @@ internshipCta:
   slug: "backend",
 
   title: ".NET Backend Track",
+  qualificationFormUrl:"https://docs.google.com/forms/d/e/1FAIpQLScMZ1xYKAfg2MAPzGS5YoEoKH7sbWRgoNwoIt3N53b8mMv3oQ/viewform?embedded=true" ,
 
   subtitle:
     "Zero → Internship / Junior .NET Backend Developer",
@@ -647,6 +654,8 @@ internshipCta:
   slug: "mobile",
 
   title: "Flutter Track",
+  qualificationFormUrl:
+  "https://docs.google.com/forms/d/e/1FAIpQLScrSmxTH2eFak9qHbj1cVWIAdgFzLIfAs8tPIceMfgCA4BpEg/viewform?embedded=true",
 
   subtitle:
     "Zero → Internship / Junior Flutter Developer",
@@ -877,6 +886,8 @@ internshipCta:
   slug: "cyber-security",
 
   title: "Cyber Security Track",
+    qualificationFormUrl:
+    "https://docs.google.com/forms/d/e/1FAIpQLSd-rAkjw4VfZTZvCXyHrRsLvpZQMyF_jWaAeHTHukOLmze96w/viewform?embedded=true" ,
 
   subtitle:
     "Zero → Internship / Junior Cyber Security Analyst",
@@ -1097,6 +1108,9 @@ internshipCta:
 slug: "frontend",
 
 title: "Front-End Track",
+ qualificationFormUrl:
+  "https://docs.google.com/forms/d/e/1FAIpQLSeJwX6CoOBNld1m-hQ3x1x82rlStrZZT08r7Nr_oBiOrHAirA/viewform?embedded=true",
+
 
 subtitle:
 "From Zero → Junior Front-End Developer",

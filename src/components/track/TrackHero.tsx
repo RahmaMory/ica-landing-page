@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import Container from "../layout/Container";
 import { motion } from "framer-motion";
 type Props = {
@@ -6,6 +7,8 @@ type Props = {
   subtitle: string;
   target: string;
   learningStyle: string[];
+    formUrl?: string;
+
 };
 
 const TrackHero = ({
@@ -14,6 +17,7 @@ const TrackHero = ({
   subtitle,
   target,
   learningStyle,
+    formUrl,
 }: Props) => {
   return (
     
@@ -59,6 +63,53 @@ text-transparent
           <p className="mx-auto mt-8 max-w-3xl text-lg leading-relaxed text-slate-400">
             {target}
           </p>
+
+          {formUrl && (
+  <motion.a
+    href={formUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    whileHover={{
+      scale: 1.03,
+    }}
+    whileTap={{
+      scale: 0.98,
+    }}
+    className="
+      group
+      mx-auto
+      mt-10
+      flex
+      w-fit
+      items-center
+      justify-center
+      gap-2
+      rounded-xl
+      bg-blue-600
+      px-7
+      py-4
+      text-sm
+      font-semibold
+      text-white
+      transition-all
+      duration-300
+      hover:bg-blue-500
+      hover:shadow-[0_0_35px_rgba(59,130,246,0.30)]
+      sm:text-base
+    "
+  >
+    Start Qualification Test
+
+    <ArrowRight
+      size={18}
+      className="
+        transition-transform
+        duration-300
+        group-hover:translate-x-1
+      "
+    />
+  </motion.a>
+)}
 
           <div
 className="

@@ -45,9 +45,9 @@ const Navbar = () => {
              <button className="rounded-xl  font-semibold text-slate-300 ">
               Sign in
             </button>
-            <button className="rounded-xl bg-blue-600 px-5 py-2 font-semibold text-white transition hover:bg-blue-500">
+            <a href="#tracks" className="rounded-xl bg-blue-600 px-5 py-2 font-semibold text-white transition hover:bg-blue-500">
               Get Started
-            </button>
+            </a>
           </div>
 
      <button
