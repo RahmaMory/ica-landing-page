@@ -15,10 +15,7 @@ export const navigationLinks = [
     title: "FAQ",
     href: "/#faq",
   },
-  {
-    title: "Locations",
-    href: "/#braches",
-  },
+  
 ];
 
 
