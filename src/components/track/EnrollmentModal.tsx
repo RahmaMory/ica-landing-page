@@ -1,3 +1,681 @@
 
+import {
+  useEffect,
+  useState,
+  type FormEvent,
+} from "react";
 
-import { useEffect, useState, type FormEvent, } from "react"; import { AnimatePresence, motion, } from "framer-motion"; import { CalendarDays, Clock3, MapPin, Phone, Send, UserRound, X, } from "lucide-react"; import { branches } from "../../data/branches"; import { enrollmentOptions } from "../../data/enrollmentOptions"; type Props = { isOpen: boolean; onClose: () => void; trackTitle: string; level: string; levelTitle: string; }; const inputClassName = ` mt-2 w-full rounded-xl border border-white/10 bg-[#071533] px-4 py-3 text-white outline-none transition-all duration-300 placeholder:text-slate-600 focus:border-blue-500/60 focus:ring-2 focus:ring-blue-500/10 `; const EnrollmentModal = ({ isOpen, onClose, trackTitle, level, levelTitle, }: Props) => { const [fullName, setFullName] = useState(""); const [phoneNumber, setPhoneNumber] = useState(""); const [selectedBranchId, setSelectedBranchId] = useState(""); const [schedule, setSchedule] = useState(""); const [preferredTime, setPreferredTime] = useState(""); const [practiceDay, setPracticeDay] = useState(""); const [notes, setNotes] = useState(""); const selectedBranch = branches.find( (branch) => branch.id === selectedBranchId ); useEffect(() => { if (!isOpen) return; const previousOverflow = document.body.style.overflow; document.body.style.overflow = "hidden"; const handleEscape = ( event: KeyboardEvent ) => { if (event.key === "Escape") { onClose(); } }; window.addEventListener( "keydown", handleEscape ); return () => { document.body.style.overflow = previousOverflow; window.removeEventListener( "keydown", handleEscape ); }; }, [isOpen, onClose]); const resetForm = () => { setFullName(""); setPhoneNumber(""); setSelectedBranchId(""); setSchedule(""); setPreferredTime(""); setPracticeDay(""); setNotes(""); }; const handleSubmit = ( event: FormEvent<HTMLFormElement> ) => { event.preventDefault(); if (!selectedBranch) { return; } const attendanceType = selectedBranch.type === "online" ? "Online" : "On Campus"; const message = `Hello ICA Academy, I would like to submit an enrollment request. *Student Information* Name: ${fullName} Phone Number: ${phoneNumber} *Course Information* Track: ${trackTitle} Level: ${level} Level Title: ${levelTitle} *Attendance Preferences* Attendance Type: ${attendanceType} Preferred Branch: ${selectedBranch.formLabel} Branch Details: ${selectedBranch.address} *Schedule Preferences* Preferred Schedule: ${schedule} Preferred Time: ${preferredTime} Practice Session Day: ${practiceDay} *Additional Notes* ${notes.trim() || "No additional notes."} Please confirm availability and provide me with the next enrollment steps. Thank you.`; const whatsappUrl = `https://wa.me/201038862184?text=${encodeURIComponent( message )}`; window.open( whatsappUrl, "_blank", "noopener,noreferrer" ); resetForm(); onClose(); }; return ( <AnimatePresence> {isOpen && ( <motion.div initial={{ opacity: 0, }} animate={{ opacity: 1, }} exit={{ opacity: 0, }} onMouseDown={onClose} className=" fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto bg-black/75 p-4 backdrop-blur-md sm:items-center " > <motion.div role="dialog" aria-modal="true" aria-labelledby="enrollment-modal-title" initial={{ opacity: 0, y: 40, scale: 0.96, }} animate={{ opacity: 1, y: 0, scale: 1, }} exit={{ opacity: 0, y: 30, scale: 0.96, }} transition={{ duration: 0.25, }} onMouseDown={(event) => event.stopPropagation() } className=" relative my-6 w-full max-w-3xl overflow-hidden rounded-[28px] border border-white/10 bg-[#08142e] shadow-2xl " > {/* Header */} <div className=" relative overflow-hidden border-b border-white/10 bg-blue-500/5 px-6 py-7 sm:px-8 " > <div className=" pointer-events-none absolute left-1/2 top-0 h-40 w-80 -translate-x-1/2 rounded-full bg-blue-500/10 blur-[90px] " /> <button type="button" onClick={onClose} aria-label="Close enrollment form" className=" absolute right-5 top-5 z-10 flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 text-slate-400 transition-all duration-300 hover:border-white/20 hover:bg-white/5 hover:text-white " > <X size={20} /> </button> <div className="relative pr-12"> <span className="text-sm font-semibold text-blue-400"> Enrollment Request </span> <h2 id="enrollment-modal-title" className=" mt-2 text-2xl font-bold text-white sm:text-3xl " > {trackTitle} </h2> <p className="mt-2 text-slate-400"> {level} — {levelTitle} </p> <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-500"> Select your preferred branch and schedule. The ICA team will contact you to confirm availability and complete the enrollment. </p> </div> </div> <form onSubmit={handleSubmit} className="p-6 sm:p-8" > <div className="grid gap-6 sm:grid-cols-2"> {/* Full Name */} <label> <span className="flex items-center gap-2 font-medium text-white"> <UserRound size={17} className="text-blue-400" /> Full Name </span> <input type="text" value={fullName} onChange={(event) => setFullName( event.target.value ) } placeholder="Enter your full name" autoComplete="name" autoFocus required className={inputClassName} /> </label> {/* Phone Number */} <label> <span className="flex items-center gap-2 font-medium text-white"> <Phone size={17} className="text-blue-400" /> Phone Number </span> <input type="tel" value={phoneNumber} onChange={(event) => setPhoneNumber( event.target.value ) } placeholder="Example: 01012345678" autoComplete="tel" required className={inputClassName} /> </label> {/* Branch */} <label className="sm:col-span-2"> <span className="flex items-center gap-2 font-medium text-white"> <MapPin size={17} className="text-blue-400" /> Preferred Branch / Attendance Method </span> <select value={selectedBranchId} onChange={(event) => setSelectedBranchId( event.target.value ) } required className={inputClassName} > <option value=""> Select a branch or online learning </option> {branches.map((branch) => ( <option key={branch.id} value={branch.id} > {branch.formLabel} </option> ))} </select> {selectedBranch && ( <motion.div initial={{ opacity: 0, y: 8, }} animate={{ opacity: 1, y: 0, }} className=" mt-3 rounded-xl border border-white/10 bg-white/[0.025] p-4 " > <div className="flex items-start gap-3"> <MapPin size={18} className="mt-0.5 shrink-0 text-cyan-400" /> <div> <p className="text-sm font-medium text-white"> {selectedBranch.title} </p> <p className="mt-2 text-sm leading-relaxed text-slate-400"> {selectedBranch.address} </p> <span className="mt-2 inline-block text-xs text-cyan-400"> {selectedBranch.note} </span> </div> </div> </motion.div> )} </label> {/* Schedule */} <label> <span className="flex items-center gap-2 font-medium text-white"> <CalendarDays size={17} className="text-blue-400" /> Preferred Schedule </span> <select value={schedule} onChange={(event) => setSchedule( event.target.value ) } required className={inputClassName} > <option value=""> Select preferred days </option> {enrollmentOptions.schedules.map( (item) => ( <option key={item} value={item} > {item} </option> ) )} </select> </label> {/* Preferred Time */} <label> <span className="flex items-center gap-2 font-medium text-white"> <Clock3 size={17} className="text-blue-400" /> Preferred Time </span> <select value={preferredTime} onChange={(event) => setPreferredTime( event.target.value ) } required className={inputClassName} > <option value=""> Select preferred time </option> {enrollmentOptions.preferredTimes.map( (item) => ( <option key={item} value={item} > {item} </option> ) )} </select> </label> {/* Practice Session */} <label className="sm:col-span-2"> <span className="flex items-center gap-2 font-medium text-white"> <CalendarDays size={17} className="text-blue-400" /> Practice Session Day </span> <select value={practiceDay} onChange={(event) => setPracticeDay( event.target.value ) } required className={inputClassName} > <option value=""> Select practice session day </option> {enrollmentOptions.practiceDays.map( (item) => ( <option key={item} value={item} > {item} </option> ) )} </select> </label> {/* Notes */} <label className="sm:col-span-2"> <span className="font-medium text-white"> Additional Notes </span> <textarea value={notes} onChange={(event) => setNotes( event.target.value ) } rows={4} placeholder="Write any questions or additional preferences..." className={`${inputClassName} resize-none`} /> </label> </div> {/* Actions */} <div className=" mt-8 flex flex-col-reverse gap-3 border-t border-white/10 pt-6 sm:flex-row sm:justify-end " > <button type="button" onClick={onClose} className=" rounded-xl border border-white/10 px-6 py-3 font-semibold text-white transition-all duration-300 hover:border-white/20 hover:bg-white/5 " > Cancel </button> <button type="submit" className=" group flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition-all duration-300 hover:bg-blue-500 hover:shadow-[0_0_30px_rgba(59,130,246,0.25)] " > Send Enrollment Request <Send size={18} className=" transition-transform duration-300 group-hover:translate-x-1 " /> </button> </div> </form> </motion.div> </motion.div> )} </AnimatePresence> ); }; export default EnrollmentModal;
+import {
+  AnimatePresence,
+  motion,
+} from "framer-motion";
+
+import {
+  CalendarDays,
+  Clock3,
+  MapPin,
+  Phone,
+  Send,
+  UserRound,
+  X,
+} from "lucide-react";
+
+import { branches } from "../../data/branches";
+import { enrollmentOptions } from "../../data/enrollmentOptions";
+
+type Props = {
+  isOpen: boolean;
+  onClose: () => void;
+  trackTitle: string;
+  level: string;
+  levelTitle: string;
+};
+
+const inputClassName = `
+  mt-2
+  w-full
+  rounded-xl
+  border
+  border-white/10
+  bg-[#071533]
+  px-4
+  py-3
+  text-white
+  outline-none
+  transition-all
+  duration-300
+  placeholder:text-slate-600
+  focus:border-blue-500/60
+  focus:ring-2
+  focus:ring-blue-500/10
+`;
+
+const EnrollmentModal = ({
+  isOpen,
+  onClose,
+  trackTitle,
+  level,
+  levelTitle,
+}: Props) => {
+  const [fullName, setFullName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [selectedBranchId, setSelectedBranchId] =
+    useState("");
+  const [schedule, setSchedule] = useState("");
+  const [preferredTime, setPreferredTime] =
+    useState("");
+  const [practiceDay, setPracticeDay] =
+    useState("");
+  const [notes, setNotes] = useState("");
+
+  const selectedBranch = branches.find(
+    (branch) => branch.id === selectedBranchId
+  );
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    const previousOverflow =
+      document.body.style.overflow;
+
+    document.body.style.overflow = "hidden";
+
+    const handleEscape = (
+      event: KeyboardEvent
+    ) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener(
+      "keydown",
+      handleEscape
+    );
+
+    return () => {
+      document.body.style.overflow =
+        previousOverflow;
+
+      window.removeEventListener(
+        "keydown",
+        handleEscape
+      );
+    };
+  }, [isOpen, onClose]);
+
+  const resetForm = () => {
+    setFullName("");
+    setPhoneNumber("");
+    setSelectedBranchId("");
+    setSchedule("");
+    setPreferredTime("");
+    setPracticeDay("");
+    setNotes("");
+  };
+
+  const handleClose = () => {
+    resetForm();
+    onClose();
+  };
+
+  const handleSubmit = (
+    event: FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+
+    if (!selectedBranch) {
+      return;
+    }
+
+    const attendanceType =
+      selectedBranch.type === "online"
+        ? "Online"
+        : "On Campus";
+
+    const message = `Hello ICA Academy,
+
+I would like to submit an enrollment request.
+
+*Student Information*
+Name: ${fullName}
+Phone Number: ${phoneNumber}
+
+*Course Information*
+Track: ${trackTitle}
+Level: ${level}
+Level Title: ${levelTitle}
+
+*Attendance Preferences*
+Attendance Type: ${attendanceType}
+Preferred Branch: ${selectedBranch.formLabel}
+Branch Details: ${selectedBranch.address}
+
+*Schedule Preferences*
+Preferred Schedule: ${schedule}
+Preferred Time: ${preferredTime}
+Practice Session Day: ${practiceDay}
+
+*Additional Notes*
+${notes.trim() || "No additional notes."}
+
+Please confirm availability and provide me with the next enrollment steps.
+
+Thank you.`;
+
+    const whatsappUrl = `https://wa.me/201038862184?text=${encodeURIComponent(
+      message
+    )}`;
+
+    window.open(
+      whatsappUrl,
+      "_blank",
+      "noopener,noreferrer"
+    );
+
+    resetForm();
+    onClose();
+  };
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+          }}
+          exit={{
+            opacity: 0,
+          }}
+          onMouseDown={handleClose}
+          className="
+            fixed
+            inset-0
+            z-[100]
+            flex
+            items-start
+            justify-center
+            overflow-y-auto
+            bg-black/75
+            p-4
+            backdrop-blur-md
+            sm:items-center
+          "
+        >
+          <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="enrollment-modal-title"
+            initial={{
+              opacity: 0,
+              y: 40,
+              scale: 0.96,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              scale: 1,
+            }}
+            exit={{
+              opacity: 0,
+              y: 30,
+              scale: 0.96,
+            }}
+            transition={{
+              duration: 0.25,
+            }}
+            onMouseDown={(event) =>
+              event.stopPropagation()
+            }
+            className="
+              relative
+              my-6
+              w-full
+              max-w-3xl
+              overflow-hidden
+              rounded-[28px]
+              border
+              border-white/10
+              bg-[#08142e]
+              shadow-2xl
+            "
+          >
+            {/* Header */}
+            <div
+              className="
+                relative
+                overflow-hidden
+                border-b
+                border-white/10
+                bg-blue-500/5
+                px-6
+                py-7
+                sm:px-8
+              "
+            >
+              <div
+                className="
+                  pointer-events-none
+                  absolute
+                  left-1/2
+                  top-0
+                  h-40
+                  w-80
+                  -translate-x-1/2
+                  rounded-full
+                  bg-blue-500/10
+                  blur-[90px]
+                "
+              />
+
+              <button
+                type="button"
+                onClick={handleClose}
+                aria-label="Close enrollment form"
+                className="
+                  absolute
+                  right-5
+                  top-5
+                  z-10
+                  flex
+                  h-10
+                  w-10
+                  items-center
+                  justify-center
+                  rounded-xl
+                  border
+                  border-white/10
+                  text-slate-400
+                  transition-all
+                  duration-300
+                  hover:border-white/20
+                  hover:bg-white/5
+                  hover:text-white
+                "
+              >
+                <X size={20} />
+              </button>
+
+              <div className="relative pr-12">
+                <span className="text-sm font-semibold text-blue-400">
+                  Enrollment Request
+                </span>
+
+                <h2
+                  id="enrollment-modal-title"
+                  className="
+                    mt-2
+                    text-2xl
+                    font-bold
+                    text-white
+                    sm:text-3xl
+                  "
+                >
+                  {trackTitle}
+                </h2>
+
+                <p className="mt-2 text-slate-400">
+                  {level} — {levelTitle}
+                </p>
+
+                <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-500">
+                  Select your preferred branch and
+                  schedule. The ICA team will contact
+                  you to confirm availability and
+                  complete the enrollment.
+                </p>
+              </div>
+            </div>
+
+            <form
+              onSubmit={handleSubmit}
+              className="p-6 sm:p-8"
+            >
+              <div className="grid gap-6 sm:grid-cols-2">
+                {/* Full Name */}
+                <label>
+                  <span className="flex items-center gap-2 font-medium text-white">
+                    <UserRound
+                      size={17}
+                      className="text-blue-400"
+                    />
+
+                    Full Name
+                  </span>
+
+                  <input
+                    type="text"
+                    value={fullName}
+                    onChange={(event) =>
+                      setFullName(
+                        event.target.value
+                      )
+                    }
+                    placeholder="Enter your full name"
+                    autoComplete="name"
+                    autoFocus
+                    required
+                    className={inputClassName}
+                  />
+                </label>
+
+                {/* Phone Number */}
+                <label>
+                  <span className="flex items-center gap-2 font-medium text-white">
+                    <Phone
+                      size={17}
+                      className="text-blue-400"
+                    />
+
+                    Phone Number
+                  </span>
+
+                  <input
+                    type="tel"
+                    value={phoneNumber}
+                    onChange={(event) =>
+                      setPhoneNumber(
+                        event.target.value
+                      )
+                    }
+                    placeholder="Example: 01012345678"
+                    autoComplete="tel"
+                    inputMode="tel"
+                    required
+                    className={inputClassName}
+                  />
+                </label>
+
+                {/* Branch */}
+                <label className="sm:col-span-2">
+                  <span className="flex items-center gap-2 font-medium text-white">
+                    <MapPin
+                      size={17}
+                      className="text-blue-400"
+                    />
+
+                    Preferred Branch / Attendance Method
+                  </span>
+
+                  <select
+                    value={selectedBranchId}
+                    onChange={(event) =>
+                      setSelectedBranchId(
+                        event.target.value
+                      )
+                    }
+                    required
+                    className={inputClassName}
+                  >
+                    <option value="">
+                      Select a branch or online learning
+                    </option>
+
+                    {branches.map((branch) => (
+                      <option
+                        key={branch.id}
+                        value={branch.id}
+                      >
+                        {branch.formLabel}
+                      </option>
+                    ))}
+                  </select>
+
+                  {selectedBranch && (
+                    <motion.div
+                      key={selectedBranch.id}
+                      initial={{
+                        opacity: 0,
+                        y: 8,
+                      }}
+                      animate={{
+                        opacity: 1,
+                        y: 0,
+                      }}
+                      className="
+                        mt-3
+                        rounded-xl
+                        border
+                        border-white/10
+                        bg-white/[0.025]
+                        p-4
+                      "
+                    >
+                      <div className="flex items-start gap-3">
+                        <MapPin
+                          size={18}
+                          className="mt-0.5 shrink-0 text-cyan-400"
+                        />
+
+                        <div>
+                          <p className="text-sm font-medium text-white">
+                            {selectedBranch.title}
+                          </p>
+
+                          <p className="mt-2 text-sm leading-relaxed text-slate-400">
+                            {selectedBranch.address}
+                          </p>
+
+                          <span className="mt-2 inline-block text-xs text-cyan-400">
+                            {selectedBranch.note}
+                          </span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </label>
+
+                {/* Schedule */}
+                <label>
+                  <span className="flex items-center gap-2 font-medium text-white">
+                    <CalendarDays
+                      size={17}
+                      className="text-blue-400"
+                    />
+
+                    Preferred Schedule
+                  </span>
+
+                  <select
+                    value={schedule}
+                    onChange={(event) =>
+                      setSchedule(
+                        event.target.value
+                      )
+                    }
+                    required
+                    className={inputClassName}
+                  >
+                    <option value="">
+                      Select preferred days
+                    </option>
+
+                    {enrollmentOptions.schedules.map(
+                      (item) => (
+                        <option
+                          key={item}
+                          value={item}
+                        >
+                          {item}
+                        </option>
+                      )
+                    )}
+                  </select>
+                </label>
+
+                {/* Preferred Time */}
+                <label>
+                  <span className="flex items-center gap-2 font-medium text-white">
+                    <Clock3
+                      size={17}
+                      className="text-blue-400"
+                    />
+
+                    Preferred Time
+                  </span>
+
+                  <select
+                    value={preferredTime}
+                    onChange={(event) =>
+                      setPreferredTime(
+                        event.target.value
+                      )
+                    }
+                    required
+                    className={inputClassName}
+                  >
+                    <option value="">
+                      Select preferred time
+                    </option>
+
+                    {enrollmentOptions.preferredTimes.map(
+                      (item) => (
+                        <option
+                          key={item}
+                          value={item}
+                        >
+                          {item}
+                        </option>
+                      )
+                    )}
+                  </select>
+                </label>
+
+                {/* Practice Session */}
+                <label className="sm:col-span-2">
+                  <span className="flex items-center gap-2 font-medium text-white">
+                    <CalendarDays
+                      size={17}
+                      className="text-blue-400"
+                    />
+
+                    Practice Session Day
+                  </span>
+
+                  <select
+                    value={practiceDay}
+                    onChange={(event) =>
+                      setPracticeDay(
+                        event.target.value
+                      )
+                    }
+                    required
+                    className={inputClassName}
+                  >
+                    <option value="">
+                      Select practice session day
+                    </option>
+
+                    {enrollmentOptions.practiceDays.map(
+                      (item) => (
+                        <option
+                          key={item}
+                          value={item}
+                        >
+                          {item}
+                        </option>
+                      )
+                    )}
+                  </select>
+                </label>
+
+                {/* Notes */}
+                <label className="sm:col-span-2">
+                  <span className="font-medium text-white">
+                    Additional Notes
+                  </span>
+
+                  <textarea
+                    value={notes}
+                    onChange={(event) =>
+                      setNotes(
+                        event.target.value
+                      )
+                    }
+                    rows={4}
+                    placeholder="Write any questions or additional preferences..."
+                    className={`${inputClassName} resize-none`}
+                  />
+                </label>
+              </div>
+
+              {/* Actions */}
+              <div
+                className="
+                  mt-8
+                  flex
+                  flex-col-reverse
+                  gap-3
+                  border-t
+                  border-white/10
+                  pt-6
+                  sm:flex-row
+                  sm:justify-end
+                "
+              >
+                <button
+                  type="button"
+                  onClick={handleClose}
+                  className="
+                    rounded-xl
+                    border
+                    border-white/10
+                    px-6
+                    py-3
+                    font-semibold
+                    text-white
+                    transition-all
+                    duration-300
+                    hover:border-white/20
+                    hover:bg-white/5
+                  "
+                >
+                  Cancel
+                </button>
+
+                <button
+                  type="submit"
+                  className="
+                    group
+                    flex
+                    items-center
+                    justify-center
+                    gap-2
+                    rounded-xl
+                    bg-blue-600
+                    px-6
+                    py-3
+                    font-semibold
+                    text-white
+                    transition-all
+                    duration-300
+                    hover:bg-blue-500
+                    hover:shadow-[0_0_30px_rgba(59,130,246,0.25)]
+                  "
+                >
+                  Send Enrollment Request
+
+                  <Send
+                    size={18}
+                    className="
+                      transition-transform
+                      duration-300
+                      group-hover:translate-x-1
+                    "
+                  />
+                </button>
+              </div>
+            </form>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
+export default EnrollmentModal;

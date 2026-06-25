@@ -1,5 +1,4 @@
 import About from "../components/sections/About";
-import Branches from "../components/sections/Branches";
 import Courses from "../components/sections/Courses";
 import CTA from "../components/sections/CTA";
 import FAQ from "../components/sections/FAQ";
@@ -29,7 +28,7 @@ export default function Home() {
     <Features/>
     <FAQ/>
     <CTA/>
-    <Branches/>
+    {/* <Branches/> */}
     
         
     </motion.div>

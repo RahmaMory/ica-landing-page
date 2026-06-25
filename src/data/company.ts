@@ -3,15 +3,18 @@ export const companyInfo = {
 
   email: "info@icaacademy.com",
 
-  phone: "+20 100 000 0000",
+  phone: "+20 1038862184",
 
   location: "Cairo, Egypt",
 
-  whatsapp: "#",
+  whatsapp: "https://wa.me/201038862184",
 
-  facebook: "#",
+  facebook: "https://www.facebook.com/share/1BQz8rzB3c/",
 
-  instagram: "#",
+  instagram: "https://www.instagram.com/ioc_academy?igsh=NzZ0NmhqYXRxMWJh",
 
-  linkedin: "#",
+  tiktok: "https://www.tiktok.com/@iocode_academy?_r=1&_t=ZS-96Dtu0ILURD",
 };
+
+
+

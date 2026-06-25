@@ -17,10 +17,7 @@ export const footerLinks = {
       title: "Contact",
       href:"https://wa.me/201038862184"
     },
-    {
-    title: "Locations",
-    href: "/#braches",
-  },
+  
    
   ],
 
