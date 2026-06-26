@@ -9,9 +9,8 @@ const Navbar = () => {
   return (
 
     <header className="fixed top-0 left-0 z-50 w-full">
-<div className="mx-auto w-full border-b border-white/10 bg-[#041330]/80">
-  <div className="mx-auto flex h-20 max-w-375 items-center justify-between px-4 sm:px-6 lg:px-10 backdrop-blur-xl">
-
+<div className="mx-auto w-full border-b border-white/10 bg-[#041330] lg:bg-[#041330]/80">
+<div className="mx-auto flex h-20 max-w-375 items-center justify-between px-4 sm:px-6 lg:px-10 lg:backdrop-blur-xl">
           <div className="flex items-center gap-2">
        <Link
   to="/"
@@ -74,8 +73,7 @@ const Navbar = () => {
  {
   isOpen && (
     <div className="absolute left-0 top-full w-full lg:hidden">
-      <div className="mx-4 mt-3 rounded-2xl border border-white/10 bg-[#041330]/95 backdrop-blur-xl shadow-2xl">
-        
+<div className="mx-4 mt-3 rounded-2xl border border-white/10 bg-[#041330] shadow-2xl">        
        <div className="flex flex-col p-6 text-slate-300">
   {navigationLinks.map((link) => (
     <HashLink
@@ -94,9 +92,23 @@ const Navbar = () => {
       Sign In
     </button>
 
-    <button className="rounded-xl bg-blue-600 py-3 font-semibold text-white hover:bg-blue-500 transition">
-      Get Started
-    </button>
+     <HashLink
+    smooth
+    to="/#tracks"
+      onClick={() => setIsOpen(false)}
+    className="
+      rounded-xl
+      bg-blue-600
+      py-3
+      text-center
+      font-semibold
+      text-white
+      transition
+      hover:bg-blue-500
+    "
+  >
+    Get Started
+  </HashLink>
   </div>
 </div>
       </div>
